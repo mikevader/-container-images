@@ -1,5 +1,5 @@
 ARG VERSION
-FROM golang:1.20.4-alpine3.16 as builder
+FROM golang:1.23.1-alpine3.20 as builder
 ARG TARGETOS
 ARG TARGETARCH
 ARG TARGETVARIANT=""
@@ -53,12 +53,12 @@ RUN \
         util-linux         wget \
     && \
     # 264 kB
-    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.14/main unrar
+    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.20/main unrar
 
 #hadolint ignore=DL3018
 RUN \
     addgroup -S lucy --gid 666 \
-        && adduser -S lucy -G lucy --uid 666 \
+    && adduser -S lucy -G lucy --uid 666 \
     && \
     mkdir -p /config \
     && chown -R lucy:lucy /config \
